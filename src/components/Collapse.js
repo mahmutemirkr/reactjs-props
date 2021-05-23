@@ -1,22 +1,42 @@
 import React from 'react';
 
-
 class Collapse extends React.Component {
+    
+    constructor(){
+        super();
+
+        this.state = {
+            showContent: false
+        }
+    }
+
+    showMore = () => {
+        //console.log(this)
+        this.setState({showContent: !this.state.showContent})
+    }
+        
     render() {
         return(
         <div>
-            <a class="btn btn-primary w-100 mt-3 mb-2" data-toggle="collapse" href={"#".concat(this.props.href)} role="button" aria-expanded="false" aria-controls="collapseExample">
+            <button className="btn btn-primary w-100 mt-3 mb-2" onClick={this.showMore}>
                 Collapse Card
-            </a>
-            <div class="collapse show" id={this.props.href}>
-                {this.props.children}
-            </div>
+            </button>
+            {
+                //if
+                this.state.showContent ? (
+                    <div className="collapse show">
+                    {this.props.children}
+                    {this.state.showContent}
+                </div>
+                ) : null
+            }         
         </div>
         );
     }
 }
 
 
+export default Collapse;
 
 
 /* const Collapse = (props) => {
@@ -32,5 +52,3 @@ class Collapse extends React.Component {
         </div>
     );
 } */
-
-export default Collapse;
